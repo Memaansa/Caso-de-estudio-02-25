@@ -1,20 +1,28 @@
+import sys
+
 class Interruptor: 
-    def __init__(self):
+    def __init__(self, test_mode=True):
         self.state = False  #Estado inicial (apagado)
-        print ("No hay luz")
+        self.test_mode = test_mode  # Modo de prueba 
+        if not self.test_mode:  
+            print ("No hay luz")
 
     def señal (self,comando):
         if comando == "ON":  #Encendido 
             self.state = True
-            print ("Se prendio el bombillo ☀️")          
+            if not self.test_mode:
+                print ("Se prendio el bombillo ☀️")          
         elif comando == "OFF":
             self.state = False  #Apagado
-            print("Se apago el bombillo 🌑")
+            if not self.test_mode:
+                print("Se apago el bombillo 🌑")
 
         else:
-            print("Señal no recibida")
+            if not self.test_mode:
+                print("Señal no recibida")
 
 Bombillo = Interruptor()
-while True:
-    comnado =input ("Ingrece (ON/OFF):")
-    Bombillo.señal(comnado)
+if __name__ == "__main__":
+    while True:
+        comnado =input ("Ingrece (ON/OFF):")
+        Bombillo.señal(comnado)
